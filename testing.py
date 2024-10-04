@@ -5,6 +5,9 @@ import streamlit as st
 import matplotlib.font_manager as fm
 from PIL import Image
 import os 
+import os
+from PIL import Image
+import streamlit as st
 
 # Font paths
 font_path = "Rajdhani-Bold.ttf"
@@ -379,25 +382,26 @@ if player_name:
             # Add text below the title for Minutes Played and Age
             fig.text(0.05225, 0.95, f'Percentile Rank vs. Positional Peers | Stats per 90\nMinutes Played: {minutes_played} | Age: {age} | Opta Data\nData as of 29/09 | Code by @DanishScout_', fontproperties=custom_fontt, fontsize=10, color='black', alpha=0.4, ha='left')
 
-
-    # Directory where the team logos are stored
-    logo_directory = 'team_logos'  # Make sure this is the correct path to your folder with the logos
     
-    # After the player data is selected
+    # Directory where the team logos are stored
+    logo_directory = 'team_logos'  # Path to your folder with the logos
+    
+    # Example player data (in your actual app, this will be dynamic)
+    # player_data = {'Team ID': '4678', ...}
     selected_team_id = player_data['Team ID']  # Get Team ID of the selected player
     
     # Construct the path to the team logo
-    team_logo_path = os.path.join(logo_directory, f'{selected_team_id}.png')  # Adjust the file extension if needed
+    team_logo_path = os.path.join(logo_directory, f'{selected_team_id}.png')  # Assuming the logo files are in PNG format
     
     # Check if the logo file exists
     if os.path.isfile(team_logo_path):
         # Load the logo image
         team_logo = Image.open(team_logo_path)
-    
-        # Add a new axis in the figure to display the logo
-        logo_ax = fig.add_axes([0.86, 0.94, 0.095, 0.095])  # Adjust the position and size as needed
-        logo_ax.imshow(team_logo)  # Plot the image
-        logo_ax.axis('off')  # Hide the axis for the logo
+        
+        # Display the logo in the Streamlit app
+        st.image(team_logo, caption=f'Team Logo for Team ID {selected_team_id}', use_column_width=True)
+
+
 
 
             # Button to display the plot
