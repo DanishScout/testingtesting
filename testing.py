@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import streamlit as st
 import matplotlib.font_manager as fm
 from PIL import Image
@@ -19,7 +18,6 @@ custom_font = fm.FontProperties(fname=font_path)
 custom_fontt = fm.FontProperties(fname=font_pathh)
 custom_fonttt = fm.FontProperties(fname=font_pathhh)
 
-import pandas as pd
 
 # Load the new CSV files into DataFrames
 df1 = pd.read_csv('den1.csv')
@@ -383,23 +381,23 @@ if player_name:
             fig.text(0.05225, 0.95, f'Percentile Rank vs. Positional Peers | Stats per 90\nMinutes Played: {minutes_played} | Age: {age} | Opta Data\nData as of 29/09 | Code by @DanishScout_', fontproperties=custom_fontt, fontsize=10, color='black', alpha=0.4, ha='left')
 
     
-    # Directory where the team logos are stored
-    logo_directory = 'team_logos'  # Path to your folder with the logos
+    import streamlit as st
+
+    # Base URL for the GitHub repository (raw content)
+    github_base_url = 'https://raw.githubusercontent.com/DanishScout/testingtesting/main/team_logos/'
     
-    # Example player data (in your actual app, this will be dynamic)
-    # player_data = {'Team ID': '4678', ...}
+    # Example player data (this should come from your app logic)
+    # player_data = {'Team ID': '10001', ...}
     selected_team_id = player_data['Team ID']  # Get Team ID of the selected player
     
-    # Construct the path to the team logo
-    team_logo_path = os.path.join(logo_directory, f'{selected_team_id}.png')  # Assuming the logo files are in PNG format
+    # Construct the URL to the team logo
+    team_logo_url = f"{github_base_url}{selected_team_id}.png"  # Assuming the logos are PNG files
     
-    # Check if the logo file exists
-    if os.path.isfile(team_logo_path):
-        # Load the logo image
-        team_logo = Image.open(team_logo_path)
-        
-        # Display the logo in the Streamlit app
-        st.image(team_logo, caption=f'Team Logo for Team ID {selected_team_id}', use_column_width=True)
+    # Display the logo in the Streamlit app
+    st.image(team_logo_url, caption=f'Team Logo for Team ID {selected_team_id}', use_column_width=True)
+    
+    # Continue with the rest of your Streamlit app code
+
 
 
 
